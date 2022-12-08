@@ -4,9 +4,9 @@ type Repo {
   ownerName: String!
   fullName: String!
   repoHtmlUrl: String!
-  description: String!
+  description: String
   stars: Int!
-  language: String!
+  language: String
 }
 
 type Query {

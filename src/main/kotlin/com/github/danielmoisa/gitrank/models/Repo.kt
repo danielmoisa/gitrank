@@ -16,8 +16,8 @@ data class Repo(
     @get:JsonProperty("html_url")
     val repoHtmlUrl: String = "",
     @Column(columnDefinition="TEXT", length = 1000)
-    val description: String = "",
+    val description: String? = null,
     @get:JsonProperty("stargazers_count")
     val stars: Int = 0,
-    val language: String = "",
+    val language: String? = null,
 )
