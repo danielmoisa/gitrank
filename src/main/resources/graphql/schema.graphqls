@@ -2,7 +2,7 @@ type Repo {
   id: Int!
   name: String!
   ownerName: String!
-  ownerHtmlUrl: String!
+  fullName: String!
   repoHtmlUrl: String!
   description: String!
   stars: Int!
@@ -13,19 +13,19 @@ type Query {
   repos: [Repo]
 }
 
-input RepoInput {
-  id: Int!
-  name: String!
-  ownerName: String!
-  ownerHtmlUrl: String!
-  repoHtmlUrl: String!
-  description: String!
-  stars: Int!
-  language: String!
-}
-
-
-type Mutation {
-  createRepo(repo: RepoInput): Repo
-  deleteRepo(id: ID!): Boolean
-}
+#input RepoInput {
+#  id: Int!
+#  name: String!
+#  ownerName: String!
+#  ownerHtmlUrl: String!
+#  repoHtmlUrl: String!
+#  description: String!
+#  stars: Int!
+#  language: String!
+#}
+#
+#
+#type Mutation {
+#  createRepo(repo: RepoInput): Repo
+#  deleteRepo(id: ID!): Boolean
+#}
