@@ -20,8 +20,19 @@ type Query {
 #  street: String!
 #}
 
+input RepoInput {
+  id: Int!
+  name: String!
+  ownerName: String!
+  ownerHtmlUrl: String!
+  repoHtmlUrl: String!
+  description: String!
+  stars: Int!
+  language: String!
+}
 
-#type Mutation {
+
+type Mutation {
 #  createPerson(person: PersonInput): Person
-#  createAddress(address: AddressInput): Address
-#}
+  createRepo(repo: RepoInput): Repo
+}
