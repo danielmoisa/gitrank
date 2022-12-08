@@ -18,4 +18,9 @@ class RepoController(val repoRepository: RepoRepository) {
         return repoRepository.save(repo)
     }
 
+    @MutationMapping(name = "deleteRepo")
+    fun updateRepo(@Argument id: Int, @Argument(name = "repo") repo: Repo) {
+       return repoRepository.deleteById(id)
+    }
+
 }

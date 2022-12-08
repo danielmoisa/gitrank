@@ -13,13 +13,6 @@ type Query {
   repos: [Repo]
 }
 
-#input AddressInput {
-#  id: String!
-#  personId: Int!
-#  type: AddressType!
-#  street: String!
-#}
-
 input RepoInput {
   id: Int!
   name: String!
@@ -33,6 +26,6 @@ input RepoInput {
 
 
 type Mutation {
-#  createPerson(person: PersonInput): Person
   createRepo(repo: RepoInput): Repo
+  deleteRepo(id: ID!): Boolean
 }
