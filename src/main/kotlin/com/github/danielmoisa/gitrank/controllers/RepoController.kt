@@ -11,6 +11,6 @@ class RepoController(val repoService: RepoService) {
     @QueryMapping(value = "repos")
     fun getAllRepos(): MutableList<Repo> {
         return repoService.getAllRepos()
-
     }
+
 }

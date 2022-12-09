@@ -7,10 +7,15 @@ type Repo {
   description: String
   stars: Int!
   language: String
+  forks: Int!
+  watchers: Int!
+  linesOfCode: Int!
+  openedIssues: Int!
+  score: Int!
 }
 
-type Query {
-  repos: [Repo]
+type Score {
+  score: Int!
 }
 
 #input RepoInput {

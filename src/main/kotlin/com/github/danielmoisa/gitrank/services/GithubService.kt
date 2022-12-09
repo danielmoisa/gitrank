@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.danielmoisa.gitrank.models.Repo
 import com.github.danielmoisa.gitrank.repositories.RepoRepository
 import com.github.danielmoisa.gitrank.responseSpec
+import com.github.danielmoisa.gitrank.utils.calculateScore
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
@@ -24,8 +25,9 @@ class GithubService(val repoRepository: RepoRepository) {
 
         val repos: MutableList<Repo> = ArrayList<Repo>()
 
-        for (repo in reposEntities) {
-            repos.add(repo)
+        for (repoEntity in reposEntities) {
+            repoEntity.score = calculateScore(repoEntity)
+            repos.add(repoEntity)
         }
 //        LOGGER.info("Github API fetched at: "+LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
         return repoRepository.saveAll((repos))
