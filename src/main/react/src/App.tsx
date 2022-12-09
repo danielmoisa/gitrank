@@ -6,9 +6,9 @@ import {
   gql
 } from "@apollo/client";
 
-const GET_GITHUB_REPOS = gql`
-  query GetGithubRepos {
-    repos {
+const GET_REPOS_BY_SCORE = gql`
+  query GetReposByScore {
+    reposByScore {
     id
     name
     fullName
@@ -16,25 +16,26 @@ const GET_GITHUB_REPOS = gql`
     description
     stars
     language
+    score
   }
   }
 `;
 
 function App() {
-  const { loading, error, data } = useQuery(GET_GITHUB_REPOS);
+  const { loading, error, data } = useQuery(GET_REPOS_BY_SCORE);
 
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
 
-  return data?.repos?.map(({ id,
+  return data?.reposByScore?.map(({ id,
     name,
     fullName,
     repoHtmlUrl,
     description,
     stars,
-    language, }) => (
+    language, score }) => (
     <div className='p-2 m-2 bg-gray-500 text-left' key={id}>
       <p>Repo name:{name}</p>
       <p>Full name: {fullName}</p>
@@ -42,6 +43,7 @@ function App() {
       <p>Number of stars: {stars}</p>
       <p>Language: {language}</p>
       <p>Url: <a target="_blank" href={repoHtmlUrl}>{repoHtmlUrl}</a></p>
+      <p>Score: {score}</p>
     </div>
   ));
 }

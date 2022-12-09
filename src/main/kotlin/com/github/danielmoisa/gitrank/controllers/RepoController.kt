@@ -13,4 +13,9 @@ class RepoController(val repoService: RepoService) {
         return repoService.getAllRepos()
     }
 
+    @QueryMapping(value = "reposByScore")
+    fun getReposByScore(): MutableList<Repo> {
+        return repoService.getReposByScore()
+    }
+
 }

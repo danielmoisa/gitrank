@@ -14,8 +14,9 @@ type Repo {
   score: Int!
 }
 
-type Score {
-  score: Int!
+type Query {
+  repos: [Repo!]
+  reposByScore: [Repo!]
 }
 
 #input RepoInput {

@@ -5,11 +5,11 @@ import com.github.danielmoisa.gitrank.models.Repo
 fun calculateScore(repo: Repo): Int {
     var score = 0
 
-    score += repo.stars * 5
-    score += repo.forks * 3
-    score += repo.watchers * 2
-    score += repo.linesOfCode * 2
-    score += repo.openedIssues / 5
+    score += repo.stars
+    score += repo.forks
+    score += repo.watchers
+    score += repo.linesOfCode
+    score += repo.openedIssues
 
-    return score
+    return score / 5
 }
