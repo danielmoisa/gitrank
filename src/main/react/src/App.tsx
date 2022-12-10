@@ -1,10 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 import {
   useQuery,
   gql
 } from "@apollo/client";
+
+type Repo = {
+  id: number
+  name: string
+  fullName: string
+  repoHtmlUrl: string
+  description: string
+  stars: number
+  language: string
+  score: number
+}
 
 const GET_REPOS_BY_SCORE = gql`
   query GetReposByScore {
@@ -24,10 +33,8 @@ const GET_REPOS_BY_SCORE = gql`
 function App() {
   const { loading, error, data } = useQuery(GET_REPOS_BY_SCORE);
 
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
 
   return data?.reposByScore?.map(({ id,
     name,
@@ -35,7 +42,7 @@ function App() {
     repoHtmlUrl,
     description,
     stars,
-    language, score }) => (
+    language, score }: Repo) => (
     <div className='p-2 m-2 bg-gray-500 text-left' key={id}>
       <p>Repo name:{name}</p>
       <p>Full name: {fullName}</p>
