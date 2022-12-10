@@ -13,8 +13,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 const val oneDay = 24*60*60*1000
+
 @Service()
 class GithubService(val repoRepository: RepoRepository) {
+
     @Scheduled(fixedDelay = oneDay.toLong())
     fun fetchGithubApiScheduler(): MutableList<Repo> {
         val jsonResponseBody: String? = responseSpec.bodyToMono(String::class.java).block()
@@ -31,5 +33,6 @@ class GithubService(val repoRepository: RepoRepository) {
         }
 //        LOGGER.info("Github API fetched at: "+LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
         return repoRepository.saveAll((repos))
- }
+    }
+
 }
