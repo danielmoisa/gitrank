@@ -3,17 +3,9 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
-
-type Repo = {
-  id: number
-  name: string
-  fullName: string
-  repoHtmlUrl: string
-  description: string
-  stars: number
-  language: string
-  score: number
-}
+import { useMemo } from 'react';
+import Table from './components/Table';
+import { Column } from 'react-table';
 
 const GET_REPOS_BY_SCORE = gql`
   query GetReposByScore {
@@ -33,26 +25,44 @@ const GET_REPOS_BY_SCORE = gql`
 function App() {
   const { loading, error, data } = useQuery(GET_REPOS_BY_SCORE);
 
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'Score',
+        accessor: 'score'
+      },
+      {
+        Header: 'Name',
+        accessor: 'fullName',
+      },
+      {
+        Header: 'Stars',
+        accessor: 'stars',
+      },
+      {
+        Header: 'Language',
+        accessor: 'language',
+      },
+      {
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Url',
+        accessor: 'repoHtmlUrl',
+      },
+    ],
+    []
+  )
+
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  return data?.reposByScore?.map(({ id,
-    name,
-    fullName,
-    repoHtmlUrl,
-    description,
-    stars,
-    language, score }: Repo) => (
-    <div className='p-2 m-2 bg-gray-500 text-left' key={id}>
-      <p>Repo name:{name}</p>
-      <p>Full name: {fullName}</p>
-      <p>Description: {description}</p>
-      <p>Number of stars: {stars}</p>
-      <p>Language: {language}</p>
-      <p>Url: <a target="_blank" href={repoHtmlUrl}>{repoHtmlUrl}</a></p>
-      <p>Score: {score}</p>
-    </div>
-  ));
+  return <div>
+    <Table columns={columns} data={data?.reposByScore} />
+  </div>
+
 }
 
 export default App
